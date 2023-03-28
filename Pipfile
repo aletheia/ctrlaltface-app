@@ -7,6 +7,7 @@ name = "pypi"
 dlib = "19.24.1"
 opencv-python = "4.7.0.72"
 numpy = "*"
+requests = "*"
 
 [dev-packages]
 autopep8 = "*"
