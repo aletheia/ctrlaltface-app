@@ -4,8 +4,9 @@ import dlib
 import logging
 import cv2
 import numpy as np
+import config
 
-faces_path = abspath("./faces")
+faces_path = abspath(config.faces_path)
 
 
 class FaceRecognition:
@@ -13,9 +14,9 @@ class FaceRecognition:
         logging.info("Initializing face recognition")
         self.detector = dlib.get_frontal_face_detector()
         self.sp = dlib.shape_predictor(
-            abspath("./libs/shape_predictor_5_face_landmarks.dat"))
+            abspath(config.dlib_landmarks_file))
         self.facerec = dlib.face_recognition_model_v1(
-            abspath("./libs/dlib_face_recognition_resnet_model_v1.dat"))
+            abspath(config.dlib_face_recognition_model_file))
         self.faces = []
         self.face_names = []
         self.face_descriptors = []
@@ -71,7 +72,9 @@ class FaceRecognition:
                     logging.info("Face recognized: {}".format(
                         self.face_names[index]))
                     return self.face_names[index]
+                else:
+                    logging.info("Face not recognized")
                 index += 1
         else:
-            logging.error("No faces found")
+            logging.info("No faces found")
             return None

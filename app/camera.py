@@ -1,8 +1,6 @@
 import cv2
 import logging
 
-logging.basicConfig(filename='output.log', level=logging.INFO)
-
 
 class Camera:
     def __init__(self):
