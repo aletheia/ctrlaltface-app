@@ -1,0 +1,10 @@
+{
+    "outputFileName": "output.log",
+    "dlibLandmarksFile": "./libs/shape_predictor_5_face_landmarks.dat",
+    "dlibFaceRecognitionModelFile": "./libs/dlib_face_recognition_resnet_model_v1.dat",
+    "facesPath": "./faces",
+    "shellyIpAddress": "SHELLY_IP",
+    "shelly_type": "SHELLY_TYPE",
+    "counterThreshold": "5",
+    "sleepTime": "30"
+}

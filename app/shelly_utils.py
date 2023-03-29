@@ -17,3 +17,8 @@ class ShellyDevice:
         url = f"http://{self.ip}/relay/{relay}?turn={state}"
         response = requests.get(url, auth=(self.username, self.password))
         return response.json()
+
+    def set_roller(self, roller, state):
+        url = f"http://{self.ip}/roller/{roller}?go={state}"
+        response = requests.get(url, auth=(self.username, self.password))
+        return response.json()
