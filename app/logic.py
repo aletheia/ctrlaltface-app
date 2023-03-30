@@ -28,7 +28,7 @@ class Logic (Observer):
         elif res == 0:
             logging.info("Found a face, but not recognized")
             self.recognized_faces = 0
-            self.bunker.announce_unknown_face()
+            self.bunker.announce_unknown()
         else:
             self.recognized_faces = 0
             logging.info("Logic: No faces found")
