@@ -6,10 +6,11 @@ import cv2
 import numpy as np
 import config
 
+
 faces_path = abspath(config.faces_path)
 
 
-class FaceRecognition:
+class FaceRecognition():
     def __init__(self):
         logging.info("Initializing face recognition")
         self.detector = dlib.get_frontal_face_detector()
@@ -65,16 +66,21 @@ class FaceRecognition:
         # recognize face in image
         (face, descriptor) = self.encode_faces(image)
         index = -1
+        face_detection = -1
+        face_name = None
         if (face is not None):
             for (face, desc) in self.faces:
                 dist = self.compute_distance(desc, descriptor)
                 if dist < 0.6:
-                    logging.info("Face recognized: {}".format(
-                        self.face_names[index]))
-                    return self.face_names[index]
+                    # logging.info("Face recognized: {}".format(
+                    #     self.face_names[index]))
+                    face_detection = 1
+                    face_name = self.face_names[index]
                 else:
                     logging.info("Face not recognized")
+                    face_detection = 0
                 index += 1
         else:
             logging.info("No faces found")
-            return None
+            face_detection = -1
+        return (face_detection, face_name)
