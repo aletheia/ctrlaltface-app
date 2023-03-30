@@ -15,6 +15,7 @@ class Bunker:
         self.forward_direction = True
         self.synthesizer = pyttsx3.init()
         self.last_action_time = time.time()
+        self.last_unknown_time = time.time()
 
     def announce_opening(self, user_name):
         self.synthesizer.say(
@@ -31,9 +32,14 @@ class Bunker:
         self.synthesizer.stop()
 
     def announce_unknown(self):
-        self.synthesizer.say(config.face_unknown_message)
-        self.synthesizer.runAndWait()
-        self.synthesizer.stop()
+        current_time = time.time()
+        delta = abs(current_time - self.last_unknown_time)
+        if delta > config.sleep_time:
+            logging.info("Activating bunker")
+            self.synthesizer.say(config.face_unknown_message)
+            self.synthesizer.runAndWait()
+            self.synthesizer.stop()
+            self.last_unknown_time = time.time()
 
     def activate(self, user_name):
         current_time = time.time()
