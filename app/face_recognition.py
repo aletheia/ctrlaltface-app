@@ -5,7 +5,7 @@ import logging
 import cv2
 import numpy as np
 import config
-
+from time import time
 
 faces_path = abspath(config.faces_path)
 
@@ -72,10 +72,12 @@ class FaceRecognition():
             for (face, desc) in self.faces:
                 dist = self.compute_distance(desc, descriptor)
                 if dist < 0.6:
-                    # logging.info("Face recognized: {}".format(
-                    #     self.face_names[index]))
+                    logging.info("Face recognized: {}".format(
+                        self.face_names[index]))
                     face_detection = 1
                     face_name = self.face_names[index]
+                    ts = time()
+                    cv2.imwrite(f"./tmp/face-{ts}.png", image)
                 else:
                     logging.info("Face not recognized")
                     face_detection = 0
