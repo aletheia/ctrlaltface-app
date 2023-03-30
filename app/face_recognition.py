@@ -76,11 +76,13 @@ class FaceRecognition():
                         self.face_names[index]))
                     face_detection = 1
                     face_name = self.face_names[index]
-                    ts = time()
-                    cv2.imwrite(f"./tmp/face-{ts}.png", image)
                 else:
                     logging.info("Face not recognized")
                     face_detection = 0
+                if (config.save_detected_faces):
+                    ts = time()
+                    save_path = abspath("./tmp")
+                    cv2.imwrite(f"{save_path}/{face_name}-{ts}.png", image)
                 index += 1
         else:
             logging.info("No faces found")
