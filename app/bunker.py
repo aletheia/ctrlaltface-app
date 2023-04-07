@@ -12,6 +12,7 @@ import time
 def announceWorker(queue):
     synthesizer = pyttsx3.init()
     while True:
+        logging.info("Waiting for message")
         message = queue.get()
         synthesizer.say(message)
         synthesizer.runAndWait()
@@ -26,6 +27,8 @@ class Bunker:
         self.synthesizer = pyttsx3.init()
         self.last_action_time = time.time()
         self.last_unknown_time = time.time()
+
+        logging.info("Starting bunker face monitoring")
         self.queue = mp.Queue()
         self.process = mp.Process(target=announceWorker, args=(self.queue,))
         self.process.start()
