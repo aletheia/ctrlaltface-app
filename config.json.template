@@ -7,4 +7,7 @@
     "shelly_type": "SHELLY_TYPE",
     "counterThreshold": "5",
     "sleepTime": "30"
+    "recognitionSuccessMessage": "Face detected. Wellcome {0}!",
+    "recognitionFailMessage": "Face unknown. You shall not pass.",
+    "useVideo": false
 }

@@ -49,10 +49,11 @@ class FrameGrabber(Observable):
 
     def run(self):
         logging.info("Starting frame grabber")
+        cv2.destroyAllWindows()
         while True:
             try:
                 frame = self.get_frame()
-                # cv2.imshow('Video', frame)
+
                 self.notify(frame)
             except Exception as e:
                 logging.error("Failed to get frame: {}".format(e))

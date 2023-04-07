@@ -35,7 +35,7 @@ class FaceRecognition():
             face_aligned = dlib.get_face_chip(image, shape)
             face_descriptor = np.array(self.facerec.compute_face_descriptor(
                 face_aligned))
-            face_encoded = (face_aligned, face_descriptor)
+            face_encoded = (face_aligned, face_descriptor, faces_in_image)
         else:
             logging.error("No faces found in image")
 
@@ -47,7 +47,7 @@ class FaceRecognition():
             if not face_file.startswith("."):
                 logging.info("Loading face: {}".format(face_file))
                 img = cv2.imread(join(faces_path, face_file))
-                face, desc = self.encode_faces(img)
+                face, desc, _ = self.encode_faces(img)
                 name = face_file.split(".")[0]
                 self.faces.append((face, desc, name))
 
@@ -64,9 +64,10 @@ class FaceRecognition():
         return euclidean_distance
 
     def recognize_face(self, image):
+
         # recognize face in image
 
-        (face, descriptor) = self.encode_faces(image)
+        (face, descriptor, faces_in_image) = self.encode_faces(image)
 
         face_recognized = False
         face_name = None
@@ -100,7 +101,7 @@ class FaceRecognition():
 
             face, desc, name = most_similar_face
 
-            return (face_recognized, name)
+            return (face_recognized, name, faces_in_image)
         else:
             logging.info("No faces found")
             return None, None

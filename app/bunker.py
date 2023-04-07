@@ -48,7 +48,7 @@ class Bunker:
             logging.info("Activating bunker")
 
             if self.forward_direction:
-                self.announce_opening(user_name)
+                # self.announce_opening(user_name)
                 logging.info("ufff")
                 if config.shelly_type == "roller":
                     res = self.device.openRoller()
@@ -57,7 +57,7 @@ class Bunker:
                 else:
                     logging.error("Unknown shelly type")
             else:
-                self.announce_closing(user_name)
+                # self.announce_closing(user_name)
                 logging.info("dsdssdsd")
                 if config.shelly_type == "roller":
                     res = self.device.closeRoller()
