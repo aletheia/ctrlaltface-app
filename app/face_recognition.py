@@ -36,10 +36,10 @@ class FaceRecognition():
             face_descriptor = np.array(self.facerec.compute_face_descriptor(
                 face_aligned))
             face_encoded = (face_aligned, face_descriptor, faces_in_image)
+            return face_encoded
         else:
             logging.error("No faces found in image")
-
-        return face_encoded
+        return None, None, None
 
     def load_faces(self):
         # load faces from faces folder
@@ -104,4 +104,4 @@ class FaceRecognition():
             return (face_recognized, name, faces_in_image)
         else:
             logging.info("No faces found")
-            return None, None
+            return None, None, None
