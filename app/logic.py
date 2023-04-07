@@ -43,7 +43,7 @@ class Logic (Observer):
             else:
                 logging.info("Found a face, but not recognized")
                 self.recognized_faces = []
-                # self.bunker.announce_unknown()
+                self.bunker.announce_unknown()
         else:
             self.recognized_faces = []
             logging.info("Logic: No faces found")
